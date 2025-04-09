@@ -1,3 +1,14 @@
+# Ignorar plataformas específicas
+ios/
+linux/
+macos/
+windows/
+test/
+
+# Outros arquivos/diretórios para ignorar
+.metadata
+pubspec.lock
+
 # Miscellaneous
 *.class
 *.log
