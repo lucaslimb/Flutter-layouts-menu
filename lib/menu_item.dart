@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:layout_menu/pizza_data.dart';
+
 
 class MenuItem extends StatelessWidget {
-  const MenuItem({super.key});
+  final Pizza pizza;
+  const MenuItem({super.key, required this.pizza});
 
   @override
   Widget build(BuildContext context) {
@@ -11,18 +14,29 @@ class MenuItem extends StatelessWidget {
               child: Row(
                 children: 
                 [
-                  Image.asset("images/focaccia.jpg", width: 100, height: 100),
+                  ColorFiltered(
+                    colorFilter: pizza.soldOut ? 
+                    ColorFilter.mode(Colors.grey, BlendMode.saturation) : 
+                    ColorFilter.mode(Colors.transparent, BlendMode.saturation),
+                    child: Image.asset(
+                      "images/${pizza.photoName}", 
+                      width: 100, 
+                      height: 100,
+                      fit: BoxFit.cover,
+                      ),
+                  ),
                   SizedBox(width: 16),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: 
                       [
-                        Text("Focaccia", 
+                        Text(pizza.name, 
                           style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-                        Text("Bread with italian olive oil and rosemary", 
+                        Text(pizza.ingredients, 
                           style: TextStyle(fontSize: 16, color: Colors.black87)),
-                        Text("\$6", 
+                        Text(
+                          pizza.soldOut ? "Sold out" : "\$${pizza.price}", 
                           style: TextStyle(fontSize: 16, color: Colors.black54))
                       ],
                     ),
